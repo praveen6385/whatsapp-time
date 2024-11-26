@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Box</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+    #chatBox {
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header{
+                background-color: rgb(7, 73, 11);
+                color: rgb(253, 250, 250);
+                font-size: larger;
+                padding: 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    }
+    
+    .chat-header.title{
+                font-size: medium;
+            }
+            .chat-header.last-seen{
+                font-size: small;
+                color: black;
+            }
+            .chat-body{
+                flex-grow: 1;
+                padding: 15px;
+                background-color:#131212;
+                overflow-y: auto;
+                height: 400px;
+            }
+
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      height: 300px;
+    }
+    .message {
+      padding: 5px;
+      margin: 5px 0;
+      background-color: #a5daa9;
+      border-radius: 5px;
+    }
+    .sent {
+      background-color: #7dd175;
+      width: 100%;
+      align-self: flex-end;
+    }
+    .received {
+      background-color: #afbeb0;
+      width: 100%;
+      align-self: flex-start;
+    }
+    #inputArea {
+      display: flex;
+      border-top: 1px solid #a5daa9;
+    }
+    #inputArea input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    #inputArea button {
+      padding: 10px;
+      border: none;
+      background-color: #114d14;
+      color: white;
+      cursor: pointer;
+    }
+    #inputArea button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="chatBox">
+    <div class="chat-header">
+      <div class="title">whatsapp</div>
+      <div class="last-seen"><!DOCTYPE HTML>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        p {
+          font-size: 20px;
+          margin-top: 0px;
+        }
+        </style>
+        </head>
+        <body>
+        
+        <p id="demo"></p>
+        
+        <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
+        
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+        
+          // Get today's date and time
+          var now = new Date().getTime();
+            
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+            
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+          // Output the result in an element with id="demo"
+          document.getElementById("demo").innerHTML = "time: "+ hours + "h "
+          + minutes + "m " + seconds + "s ";
+            
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+          }
+        }, 1000);
+        </script>
+        
+        </body>
+        </html>
+        </div>
+    </div>
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input type="text" id="messageInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const messagesDiv = document.getElementById("messages");
+
+    function sendMessage() {
+      const input = document.getElementById("messageInput");
+      const message = input.value.trim();
+
+      if (message) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", "sent");
+        messageDiv.textContent = message;
+        messagesDiv.appendChild(messageDiv);
+
+        // Simulate receiving a reply
+        setTimeout(() => {
+          const replyDiv = document.createElement("div");
+          replyDiv.classList.add("message", "received");
+          replyDiv.textContent = "Reply: " + message;
+          messagesDiv.appendChild(replyDiv);
+          messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 1000);
+
+        input.value = "";
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
